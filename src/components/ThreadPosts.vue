@@ -4,13 +4,12 @@
     <p v-if="state.tag == 'loading'">Loading...</p>
     <h1 v-else-if="state.tag == 'error'">Sorry! {{ state.error }}</h1>
     <div v-else-if="state.tag == 'loaded'">
-      <h1>{{ category }}</h1>
-      <div class="catview-thread" v-for="thread in catView.threads" :key="thread.num">
-        <router-link :to="'/' + category + '/' + thread.num">
-          <p>no.{{ thread.num }}</p>
-          <p>{{ parseDate(thread.createdAt) }}</p>
-          <p>{{ thread.content }}</p>
-        </router-link>
+      <h2>{{ category }}</h2>
+      <h2>Thread no.{{ posts[0].num }}</h2>
+      <div class="thread-post-wrap" v-for="post in posts" :key="post.num">
+        <p>no.{{ post.num }}</p>
+        <p>{{ parseDate(post.createdAt) }}</p>
+        <p>{{ post.content }}</p>
       </div>
     </div>
   </div>
@@ -18,26 +17,31 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-import { getCatView, CatView } from "@/modules/repo.ts";
 import { Loading, Loaded, Errored, State } from "@/modules/state.ts";
+import { getThread, Post } from "@/modules/repo";
 import { parseDate } from "@/modules/fmt.ts";
 
 @Component
-export default class CategoryView extends Vue {
+export default class ThreadPosts extends Vue {
   @Prop({required: true, type: String})
   private category!: string;
 
-  private catView: CatView | null = null;
+  @Prop({required: true, type: Number})
+  private thread!: number;
+
   private state: State = { tag: "loading" };
+
+  private posts: Post[] = [];
   parseDate = parseDate
 
   async created() {
     try {
-      this.catView = await getCatView(this.category);
+      this.posts = await getThread(this.category, this.thread);
       this.state = { tag: "loaded" };
     } catch(err) {
-      this.state = { tag: "error", error: err }
+      this.state = { tag: "error", error: err };
     }
   }
+
 }
 </script>

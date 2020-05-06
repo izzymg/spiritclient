@@ -1,10 +1,10 @@
-import Vue from "vue"
-import VueRouter, { RouteConfig } from "vue-router"
-import Home from "../views/Home.vue"
+import Vue from "vue";
+import VueRouter, { RouteConfig } from "vue-router";
+import Home from "../views/Home.vue";
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
-  const routes: Array<RouteConfig> = [
+const routes: Array<RouteConfig> = [
   {
     path: "/",
     name: "Home",
@@ -16,16 +16,21 @@ Vue.use(VueRouter)
     component: () => import(/* webpackChunkName: "about" */ "../views/About.vue"),
   },
   {
+    path: "/:category/:thread",
+    name: "Thread",
+    component: () => import(/* webpackChunkName: "thread" */ "../views/Thread.vue"),
+  },
+  {
     path: "/:category",
     name: "Category",
     component: () => import(/* webpackChunkName: "category" */ "../views/Category.vue"),
-  }
-]
+  },
+];
 
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
-  routes
-})
+  routes,
+});
 
-export default router
+export default router;

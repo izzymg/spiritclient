@@ -59,8 +59,15 @@ export async function getCategories(): Promise<Category[]> {
 };
 
 /**
- 
+Fetches a category and all its threads.
 */
 export async function getCatView(category: string): Promise<CatView> {
     return fetchT<CatView>(category);
+}
+
+/**
+Fetches a thread and all its replies. 
+*/
+export async function getThread(category: string, thread: number): Promise<Post[]> {
+    return fetchT<Post[]>(`${category}/${thread}`);
 }
