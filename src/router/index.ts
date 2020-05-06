@@ -17,8 +17,8 @@ Vue.use(VueRouter)
   },
   {
     path: "/:category",
-    name: "CategoryView",
-    component: () => import(/* webpackChunkName: "categoryView" */ "../views/CategoryView.vue"),
+    name: "Category",
+    component: () => import(/* webpackChunkName: "category" */ "../views/Category.vue"),
   }
 ]
 
