@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <Notifier/>
+    <LinkHome/>
     <router-view/>
   </div>
 </template>
@@ -17,10 +18,12 @@
 
 <script>
 import Notifier from "@/components/Notifier.vue"
+import LinkHome from "@/components/LinkHome.vue"
 
 export default {
   components: {
-    Notifier
-  }
-}
+    Notifier,
+    LinkHome,
+  },
+};
 </script>

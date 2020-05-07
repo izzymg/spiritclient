@@ -1,6 +1,5 @@
 <template>
   <div class="hello">
-    <h1>Spirit</h1>
     <p>Modernized BBS/imageboard.</p>
 
     <h3>Categories</h3>

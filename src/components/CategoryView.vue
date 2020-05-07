@@ -1,17 +1,22 @@
 <template>
   <div class="catview">
-    <h2>Spirit</h2>
     <p v-if="state.tag == 'loading'">Loading...</p>
+
     <h1 v-else-if="state.tag == 'error'">Sorry! {{ state.error }}</h1>
+
     <div v-else-if="state.tag == 'loaded'">
+
       <h1>{{ category }}</h1>
       <PostForm :category="category"/>
-      <div class="catview-thread" v-for="thread in catView.threads" :key="thread.num">
-        <router-link :to="'/' + category + '/' + thread.num">
-          <p>no.{{ thread.num }}</p>
-          <p>{{ parseDate(thread.createdAt) }}</p>
-          <p>{{ thread.content }}</p>
-        </router-link>
+
+      <div class="catview-threads-wrap">
+        <div class="catview-thread" v-for="thread in catView.threads" :key="thread.num">
+          <router-link :to="'/' + category + '/' + thread.num">
+            <p>no.{{ thread.num }}</p>
+            <p>{{ parseDate(thread.createdAt) }}</p>
+            <p>{{ thread.content }}</p>
+          </router-link>
+        </div>
       </div>
     </div>
   </div>
@@ -48,3 +53,14 @@ export default class CategoryView extends Vue {
   }
 }
 </script>
+
+<style>
+.catview .catview-threads-wrap {
+  display: flex;
+  border: 2px solid black;
+}
+
+.catview .catview-threads-wrap .catview-thread {
+  border: 2px solid blue;
+}
+</style>

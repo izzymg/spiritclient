@@ -1,13 +1,13 @@
 <template>
-  <div class="catview">
-    <h2>Spirit</h2>
-
+  <div class="thread-posts">
     <p v-if="state.tag == 'loading'">Loading...</p>
 
     <h1 v-else-if="state.tag == 'error'">Sorry! {{ state.error }}</h1>
 
     <div v-else-if="state.tag == 'loaded'">
-      <h2>{{ category }}</h2>
+      <router-link :to="'/' + category" class="thread-category-link">
+        <h2>{{ category }}</h2>
+      </router-link>
       <h2>Thread no.{{ posts[0].num }}</h2>
 
       <PostForm :category="category" :thread="thread"/>
@@ -57,3 +57,13 @@ export default class ThreadPosts extends Vue {
 
 }
 </script>
+
+<style>
+.thread-posts {
+  border: 2px solid black;
+}
+
+.thread-posts .thread-post-wrap {
+  border: 1px solid blue;
+}
+</style>
