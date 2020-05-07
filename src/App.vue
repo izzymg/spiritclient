@@ -1,3 +1,5 @@
+<!-- SpiritChat App 
+Mounts global notifier and router -->
 <template>
   <div id="app">
     <Notifier/>
@@ -5,16 +7,6 @@
     <router-view/>
   </div>
 </template>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-</style>
 
 <script>
 import Notifier from "@/components/Notifier.vue"
@@ -27,3 +19,25 @@ export default {
   },
 };
 </script>
+
+<!-- Global CSS -->
+<style>
+#app {
+  font-family: "Raleway", Avenir, Helvetica, Arial, sans-serif;
+  font-size: 1.2em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+  color: inherit;
+}
+
+h1, h2, h3, h4 {
+  font-weight: normal;
+}
+</style>

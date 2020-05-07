@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <p>Modernized BBS/imageboard.</p>
+    <p>Modernized imageboard.</p>
 
     <h3>Categories</h3>
 
