@@ -12,10 +12,10 @@
 
       <PostForm :category="category" :thread="thread"/>
 
-      <div class="thread-post-wrap" v-for="post in posts" :key="post.num">
-        <p>no.{{ post.num }}</p>
-        <p>{{ parseDate(post.createdAt) }}</p>
-        <p>{{ post.content }}</p>
+      <div class="posts">
+        <div class="thread-post-wrap" v-for="post in posts" :key="post.num">
+          <ThreadPost :post="post" :isOp="false"/>
+        </div>
       </div>
     </div>
   </div>
@@ -25,13 +25,14 @@
 import { Component, Prop, Vue } from "vue-property-decorator";
 import { Loading, Loaded, Errored, State } from "@/modules/state";
 import { getThread, Post } from "@/modules/repo";
-import { parseDate } from "@/modules/fmt";
 
 import PostForm from "@/components/PostForm.vue";
+import ThreadPost from "@/components/ThreadPost.vue";
 
 @Component({
   components: {
     PostForm,
+    ThreadPost,
   },
 })
 export default class ThreadPosts extends Vue {
@@ -42,9 +43,7 @@ export default class ThreadPosts extends Vue {
   private thread!: number;
 
   private state: State = { tag: "loading" };
-
   private posts: Post[] = [];
-  parseDate = parseDate
 
   async created() {
     try {
@@ -59,11 +58,8 @@ export default class ThreadPosts extends Vue {
 </script>
 
 <style>
-.thread-posts {
-  border: 2px solid black;
-}
-
 .thread-posts .thread-post-wrap {
-  border: 1px solid blue;
+  margin: 0.5em 0;
+  text-align: left;
 }
 </style>
