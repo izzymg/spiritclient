@@ -12,9 +12,12 @@
       <div class="catview-threads-wrap">
         <div class="catview-thread" v-for="thread in catView.threads" :key="thread.num">
           <router-link :to="'/' + category + '/' + thread.num">
-            <p>no.{{ thread.num }}</p>
-            <p>{{ parseDate(thread.createdAt) }}</p>
-            <p>{{ thread.content }}</p>
+            <p class="thread-title">
+              <span class="op-tag">Op</span>
+              <span class="num">no.{{ thread.num }}</span>
+              <span class="timestamp">{{ parseDate(thread.createdAt) }}</span>
+            </p>
+            <p class="content">{{ thread.content }}</p>
           </router-link>
         </div>
       </div>
@@ -57,10 +60,49 @@ export default class CategoryView extends Vue {
 <style>
 .catview .catview-threads-wrap {
   display: flex;
-  border: 2px solid black;
+  flex-flow: column wrap;
 }
 
 .catview .catview-threads-wrap .catview-thread {
-  border: 2px solid blue;
+  margin: 0.8em;
+  padding: 0.3em;
+  max-width: 70%;
+  max-height: 400px;
+  overflow-y: hidden;
+
+  text-align: left;
+  cursor: pointer;
+
+  border: 1px solid hsl(0, 0%, 89%);
+
+  word-break: break-all;
+
+  transition-property: border;
+  transition-duration: 150ms;
+  transition-timing-function: ease-in;
 }
+
+.catview .catview-threads-wrap .catview-thread:hover {
+  border: 1px solid #d3bcae;
+}
+.catview .catview-threads-wrap .catview-thread .thread-title {
+  margin: 0;
+}
+
+.catview .catview-threads-wrap .catview-thread .thread-title .op-tag {
+  float: right;
+  color: hsl(0, 0%, 50%);
+  font-size: smaller;
+}
+.catview .catview-threads-wrap .catview-thread .thread-title .num {
+  margin-right: 5px;
+  font-size: 0.85em;
+  color: #489248;
+}
+
+.catview .catview-threads-wrap .catview-thread .thread-title .timestamp {
+  color: #5a4e4e;
+  font-size: 0.9em;
+}
+
 </style>
