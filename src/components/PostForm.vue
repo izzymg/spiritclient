@@ -56,7 +56,8 @@ export default class PostForm extends Vue {
 
 <style>
 .postform .postform-content {
-  width: 300px;
-  height: 80px;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 300px;
 }
 </style>
