@@ -40,4 +40,26 @@ a {
 h1, h2, h3, h4 {
   font-weight: normal;
 }
+
+button, input[type="submit"] {
+  font-family: inherit;
+  font-size: 0.75em;
+
+  border: none;
+  background: hsl(0, 0%, 95%);
+  border: 1px solid hsl(0, 0%, 83%);
+  border-radius: 9px;
+
+  padding: 1em;
+  
+  cursor: pointer;
+
+  transition-property: border;
+  transition-duration: 150ms;
+  transition-timing-function: ease-in;
+}
+
+button, input[type="submit"]:hover {
+  border: 1px solid hsl(0, 0%, 70%);
+}
 </style>

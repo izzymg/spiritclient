@@ -34,7 +34,7 @@ export default class PostForm extends Vue {
       case "loading":
         return "Submitting...";
       default:
-        return this.thread == 0 ? "Submit thread" : "Submit reply";
+        return this.thread == 0 ? "New thread" : "Reply";
     };
   }
 
@@ -55,15 +55,8 @@ export default class PostForm extends Vue {
 </script>
 
 <style>
-.postform {
-  border: 2px solid green;
-}
-
 .postform .postform-content {
-  border: 1px solid red;
-}
-
-.postform .submit-btn {
-  border: 1px solid blue;
+  width: 300px;
+  height: 80px;
 }
 </style>
