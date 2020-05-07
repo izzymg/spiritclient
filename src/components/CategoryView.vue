@@ -5,6 +5,7 @@
     <h1 v-else-if="state.tag == 'error'">Sorry! {{ state.error }}</h1>
     <div v-else-if="state.tag == 'loaded'">
       <h1>{{ category }}</h1>
+      <PostForm :category="category"/>
       <div class="catview-thread" v-for="thread in catView.threads" :key="thread.num">
         <router-link :to="'/' + category + '/' + thread.num">
           <p>no.{{ thread.num }}</p>
@@ -18,11 +19,17 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-import { getCatView, CatView } from "@/modules/repo.ts";
-import { Loading, Loaded, Errored, State } from "@/modules/state.ts";
-import { parseDate } from "@/modules/fmt.ts";
+import { getCatView, CatView } from "@/modules/repo";
+import { Loading, Loaded, Errored, State } from "@/modules/state";
+import { parseDate } from "@/modules/fmt";
 
-@Component
+import PostForm from "@/components/PostForm.vue";
+
+@Component({
+  components: {
+    PostForm,
+  }
+})
 export default class CategoryView extends Vue {
   @Prop({required: true, type: String})
   private category!: string;

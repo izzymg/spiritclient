@@ -1,21 +1,28 @@
 const baseURL = "http://localhost:3000/v1";
 
 /**
-Information about a category. 
+A category of threads.
 */
 export interface Category {
     name: string,
 };
 
 /**
-Information about a thread or a reply. 
+A thread or a reply. 
 */
 export interface Post {
     uid: string,
     num: number,
     category: string,
     content: string,
-    createdAt: Date
+    createdAt: Date,
+};
+
+/**
+An outgoing post to be sent to the API. 
+*/
+export interface UserPost {
+    content: string,
 };
 
 /**
@@ -29,12 +36,11 @@ export interface CatView extends Category {
 Generic fetch, returns JSON response of type T.
 @param path Appended onto the base URL if specified: e.g. /animals/1
 */
-async function fetchT<T>(path?: string): Promise<T> {
+async function fetchT<T>(path?: string, info?: RequestInit): Promise<T> {
     const url = path ? `${baseURL}/${path}` : baseURL;
-
     let res;
     try {
-        res = await fetch(url);
+        res = await fetch(url, info);
     } catch(err) {
         console.error(err);
         throw "Couldn't contact the server.";
@@ -48,7 +54,6 @@ async function fetchT<T>(path?: string): Promise<T> {
         default:
             throw res.statusText;
     }
-
 }
 
 /**
@@ -70,4 +75,17 @@ Fetches a thread and all its replies.
 */
 export async function getThread(category: string, thread: number): Promise<Post[]> {
     return fetchT<Post[]>(`${category}/${thread}`);
+}
+
+/**
+Writes a reply to thread, or a new thread if not provided.
+*/
+export async function postPost(post: UserPost, category: string, thread?: number): Promise<void> {
+    fetchT<{}>(`${category}/${thread ? thread : 0}`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(post),
+    });
 }

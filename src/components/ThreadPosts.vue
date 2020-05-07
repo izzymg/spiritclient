@@ -17,9 +17,9 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-import { Loading, Loaded, Errored, State } from "@/modules/state.ts";
+import { Loading, Loaded, Errored, State } from "@/modules/state";
 import { getThread, Post } from "@/modules/repo";
-import { parseDate } from "@/modules/fmt.ts";
+import { parseDate } from "@/modules/fmt";
 
 @Component
 export default class ThreadPosts extends Vue {
