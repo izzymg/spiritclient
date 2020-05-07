@@ -2,7 +2,7 @@
   <div class="hello">
     <p>Modernized imageboard.</p>
 
-    <h3>Categories</h3>
+    <h2>Categories</h2>
 
     <p v-if="state.tag == 'loading'">Loading...</p>
     <p v-else-if="state.tag == 'error'">Sorry! {{ state.error }}</p>
@@ -36,3 +36,29 @@ export default class CategoryList extends Vue {
   }
 }
 </script>
+
+<style>
+.hello .categories {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto;
+  width: 60%;
+  margin: 0 auto;
+}
+
+.hello .categories .category {
+  margin: 0 0 0.3em 0;
+  border-bottom: 2px solid hsl(0, 0%, 80%);
+  padding: 0.5em;
+
+  cursor: pointer;
+
+  transition-property: border-bottom;
+  transition-duration: 150ms;
+  transition-timing-function: ease-in;
+}
+
+.hello .categories .category:hover {
+  border-bottom: 2px solid hsl(138, 38%, 68%);
+}
+</style>
