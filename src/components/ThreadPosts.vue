@@ -13,8 +13,9 @@
       <PostForm :category="category" :thread="thread"/>
 
       <div class="posts">
-        <div class="thread-post-wrap" v-for="post in posts" :key="post.num">
-          <ThreadPost :post="post" :isOp="false"/>
+        <div class="thread-post-wrap" v-for="(post, i) in posts" :key="post.num">
+          <!-- First post in thread is OP -->
+          <ThreadPost :class="{ reply: i !== 0, op: i === 0}" :post="post" :isOp="i === 0"/>
         </div>
       </div>
     </div>
@@ -61,5 +62,9 @@ export default class ThreadPosts extends Vue {
 .thread-posts .thread-post-wrap {
   margin: 0.5em 0;
   text-align: left;
+}
+
+.thread-posts .thread-post-wrap .reply {
+  margin-left: 10px;
 }
 </style>

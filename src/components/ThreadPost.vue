@@ -5,7 +5,8 @@
       <span class="num">no.{{ post.num }}</span>
       <span class="timestamp">{{ timestamp }}</span>
     </p>
-    <p class="content">{{ post.content }}</p>
+    <p v-if="isPreview" class="content small">{{ previewContent }}</p>
+    <p v-else class="content">{{ post.content }}</p>
   </div>
 </template>
 
@@ -15,17 +16,29 @@ import { Post } from "@/modules/repo";
 
 import dayjs from "dayjs";
 
+const previewMaxCharacters = 80;
+
 @Component
 export default class ThreadPost extends Vue {
   @Prop({ required: true })
   private post!: Post;
 
-  @Prop({ required: true, type: Boolean })
+  @Prop({ required: false, type: Boolean })
   private isOp!: boolean;
 
+  @Prop({ required: true, type: Boolean })
+  private isPreview!: boolean;
+
   get timestamp(): string {
-    return dayjs(this.post.createdAt).format("hh:mm a MMM D YYYY");
-  };
+    return dayjs(this.post.createdAt).format("hh:mm a MMM D 'YY");
+  }
+
+  get previewContent(): string {
+    if(this.post.content.length > previewMaxCharacters) {
+      return this.post.content.substr(0, 80) + "...";
+    }
+    return this.post.content;
+  }
 }
 </script>
 
@@ -33,12 +46,10 @@ export default class ThreadPost extends Vue {
 .thread-post {
   padding: 0.3em;
 
-  cursor: pointer;
-
   border: 1px solid hsl(0, 0%, 89%);
 
   word-break: break-all;
-  overflow-y: hidden;
+  overflow: hidden;
 
   transition-property: border;
   transition-duration: 150ms;
@@ -57,14 +68,27 @@ export default class ThreadPost extends Vue {
   color: hsl(0, 0%, 50%);
   font-size: smaller;
 }
+
+.thread-post .meta {
+  font-size: 0.75em;
+}
+
 .thread-post .meta .num {
   margin-right: 5px;
-  font-size: 0.85em;
   color: #489248;
 }
 
 .thread-post .meta .timestamp {
+  display: block;
   color: #5a4e4e;
+}
+
+.thread-post .content {
   font-size: 0.9em;
 }
+
+.thread-post .content.small {
+  font-size: 0.75em;
+}
+
 </style>

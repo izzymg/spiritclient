@@ -12,7 +12,7 @@
       <div class="catview-threads-wrap">
         <div class="catview-thread" v-for="thread in catView.threads" :key="thread.num">
           <router-link :to="'/' + category + '/' + thread.num">
-            <ThreadPost :post="thread" :isOp="true"/>
+            <ThreadPost :isPreview="true" :post="thread"/>
           </router-link>
         </div>
       </div>
@@ -55,12 +55,13 @@ export default class CategoryView extends Vue {
 <style>
 .catview .catview-threads-wrap {
   display: flex;
-  flex-flow: column wrap;
+  flex-flow: row wrap;
   text-align: left;
 }
 
 .catview .catview-threads-wrap .catview-thread {
-  margin: 0.5em 0;
+  flex-basis: 15%;
+  margin: 0.5em;
 }
 
 </style>
