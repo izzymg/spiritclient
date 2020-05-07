@@ -12,6 +12,8 @@
 
       <PostForm :category="category" :thread="thread"/>
 
+      <Toolbar @refresh="loadPosts"/>
+
       <div class="posts">
         <div class="thread-post-wrap" v-for="(post, i) in posts" :key="post.num">
           <!-- First post in thread is OP -->
@@ -29,11 +31,13 @@ import { getThread, Post } from "@/modules/repo";
 
 import PostForm from "@/components/PostForm.vue";
 import ThreadPost from "@/components/ThreadPost.vue";
+import Toolbar from "@/components/Toolbar.vue";
 
 @Component({
   components: {
     PostForm,
     ThreadPost,
+    Toolbar,
   },
 })
 export default class ThreadPosts extends Vue {
@@ -46,7 +50,11 @@ export default class ThreadPosts extends Vue {
   private state: State = { tag: "loading" };
   private posts: Post[] = [];
 
-  async created() {
+  created() {
+    this.loadPosts();
+  }
+
+  async loadPosts() {
     try {
       this.posts = await getThread(this.category, this.thread);
       this.state = { tag: "loaded" };

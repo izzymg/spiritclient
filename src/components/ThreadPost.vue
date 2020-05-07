@@ -26,7 +26,7 @@ export default class ThreadPost extends Vue {
   @Prop({ required: false, type: Boolean })
   private isOp!: boolean;
 
-  @Prop({ required: true, type: Boolean })
+  @Prop({ required: false, type: Boolean })
   private isPreview!: boolean;
 
   get timestamp(): string {

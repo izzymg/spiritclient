@@ -9,10 +9,12 @@
       <h1>{{ category }}</h1>
       <PostForm :category="category"/>
 
+      <Toolbar @refresh="loadThreads"/>
+
       <div class="catview-threads-wrap">
         <div class="catview-thread" v-for="thread in catView.threads" :key="thread.num">
           <router-link :to="'/' + category + '/' + thread.num">
-            <ThreadPost :isPreview="true" :post="thread"/>
+            <ThreadPost isPreview :post="thread"/>
           </router-link>
         </div>
       </div>
@@ -27,11 +29,13 @@ import { Loading, Loaded, Errored, State } from "@/modules/state";
 
 import PostForm from "@/components/PostForm.vue";
 import ThreadPost from "@/components/ThreadPost.vue";
+import Toolbar from "@/components/Toolbar.vue";
 
 @Component({
   components: {
     PostForm,
-    ThreadPost
+    ThreadPost,
+    Toolbar,
   }
 })
 export default class CategoryView extends Vue {
@@ -41,7 +45,11 @@ export default class CategoryView extends Vue {
   private catView: CatView | null = null;
   private state: State = { tag: "loading" };
 
-  async created() {
+  created() {
+    this.loadThreads();
+  }
+
+  async loadThreads() {
     try {
       this.catView = await getCatView(this.category);
       this.state = { tag: "loaded" };
@@ -49,6 +57,7 @@ export default class CategoryView extends Vue {
       this.state = { tag: "error", error: err }
     }
   }
+
 }
 </script>
 
