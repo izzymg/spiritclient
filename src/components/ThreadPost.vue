@@ -5,8 +5,8 @@
       <span class="num">no.{{ post.num }}</span>
       <span class="timestamp">{{ timestamp }}</span>
     </p>
-    <p v-if="isPreview" class="content small">{{ previewContent }}</p>
-    <p v-else class="content">{{ post.content }}</p>
+    <p v-if="isPreview" class="content small" v-html="previewContent"/>
+    <p v-else v-html="post.content" class="content"/>
   </div>
 </template>
 
@@ -57,7 +57,7 @@ export default class ThreadPost extends Vue {
 }
 
 .thread-post:hover {
-  border: 1px solid #d3bcae;
+  border: 1px solid #a7a3a3;
 }
 .thread-post .meta {
   margin: 0;
@@ -70,7 +70,7 @@ export default class ThreadPost extends Vue {
 }
 
 .thread-post .meta {
-  font-size: 0.75em;
+  font-size: 0.9em;
 }
 
 .thread-post .meta .num {
@@ -84,11 +84,12 @@ export default class ThreadPost extends Vue {
 }
 
 .thread-post .content {
-  font-size: 0.9em;
+  margin: 0;
+  padding: 0.3em 0;
 }
 
 .thread-post .content.small {
-  font-size: 0.75em;
+  font-size: 0.9em;
 }
 
 </style>

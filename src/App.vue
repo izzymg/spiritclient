@@ -24,7 +24,6 @@ export default {
 <style>
 #app {
   font-family: "Raleway", Avenir, Helvetica, Arial, sans-serif;
-  font-size: 1.2em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -43,14 +42,13 @@ h1, h2, h3, h4 {
 
 button, input[type="submit"] {
   font-family: inherit;
-  font-size: 0.75em;
 
   border: none;
   background: hsl(0, 0%, 95%);
   border: 1px solid hsl(0, 0%, 83%);
   border-radius: 9px;
 
-  padding: 1em;
+  padding: 0.7em;
   
   cursor: pointer;
 

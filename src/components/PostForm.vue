@@ -1,14 +1,19 @@
 <template>
   <div class="postform">
-    <textarea v-model="content" class="postform-content"/>
-    <div class="postform-actions-wrap">
-      <input
-        class="submit-btn"
-        @click="submit"
-        type="submit"
-        :value="submitText"
-        :disabled="state.tag == 'loading'"
-      >
+    <div class="postform-titlebar">
+      <span class="postform-title">{{ submitText }}</span>
+    </div>
+    <div class="postform-wrap">
+      <textarea v-model="content" class="postform-content" placeholder="Content"/>
+      <div class="postform-actions-wrap">
+        <input
+          class="submit-btn"
+          @click="submit"
+          type="submit"
+          :value="submitText"
+          :disabled="state.tag == 'loading'"
+        >
+      </div>
     </div>
   </div>
 </template>
@@ -55,12 +60,40 @@ export default class PostForm extends Vue {
 </script>
 
 <style>
+.postform {
+  width: 20%;
+  text-align: left;
+
+  border: 1px solid hsl(0, 0%, 75%);
+
+  margin: 15px 0;
+}
+
+.postform .postform-titlebar {
+  color: hsl(0, 0%, 98%);
+  background: #5a5e79;
+  font-size: 0.9em;
+  padding: 0.2em;
+}
+
+.postform .postform-wrap {
+  display: flex;
+}
+
 .postform .postform-content {
-  box-sizing: border-box;
-  width: 100%;
-  max-width: 300px;
+  flex: 1 0;
 
   font-family: inherit;
   padding: 0.5em;
+
+  border: none;
+  box-sizing: border-box;
+  resize: vertical;
+  outline: none;
 }
+
+.postform .submit-btn {
+  margin: 0.3em;
+}
+
 </style>
