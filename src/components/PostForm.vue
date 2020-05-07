@@ -2,7 +2,13 @@
   <div class="postform">
     <textarea v-model="content" class="postform-content"/>
     <div class="postform-actions-wrap">
-      <input @click="submit" type="submit" :value="submitText" :disabled="state.tag == 'loading'">
+      <input
+        class="submit-btn"
+        @click="submit"
+        type="submit"
+        :value="submitText"
+        :disabled="state.tag == 'loading'"
+      >
     </div>
   </div>
 </template>
@@ -10,7 +16,7 @@
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 import { postPost, UserPost } from "@/modules/repo";
-import { State, Loading, Loaded, Errored } from "@/modules/state";
+import { Notif, State, Loading, Loaded, Errored } from "@/modules/state";
 
 @Component
 export default class PostForm extends Vue {
@@ -34,7 +40,12 @@ export default class PostForm extends Vue {
 
   async submit() {
     this.state = { tag: "loading" };
-    await postPost({ content: this.content }, this.category, this.thread);
+    try {
+      await postPost({ content: this.content }, this.category, this.thread);
+      Notif.notify("Post submitted!");
+    } catch(err) {
+      Notif.notify(err);
+    }
     // Artifical delay
     setTimeout(() => {
       this.state = { tag: "loaded" };
@@ -42,3 +53,17 @@ export default class PostForm extends Vue {
   }
 }
 </script>
+
+<style>
+.postform {
+  border: 2px solid green;
+}
+
+.postform .postform-content {
+  border: 1px solid red;
+}
+
+.postform .submit-btn {
+  border: 1px solid blue;
+}
+</style>

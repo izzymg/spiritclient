@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <Notifier/>
     <router-view/>
   </div>
 </template>
@@ -13,3 +14,13 @@
   color: #2c3e50;
 }
 </style>
+
+<script>
+import Notifier from "@/components/Notifier.vue"
+
+export default {
+  components: {
+    Notifier
+  }
+}
+</script>

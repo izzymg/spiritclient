@@ -12,3 +12,24 @@ export interface Loaded {
 };
   
 export type State = Loading | Errored | Loaded;
+
+export type NotifSub = (text: string) => void;
+
+export const Notif = {
+    subscribers: new Set<NotifSub>(),
+
+    addSubscriber(sub: NotifSub) {
+        console.log("Added sub");
+        this.subscribers.add(sub);
+    },
+
+    removeSubscriber(sub: NotifSub) {
+        this.subscribers.delete(sub);
+    },
+
+    notify(text: string) {
+        this.subscribers.forEach(subscriber => {
+            subscriber(text);
+        });
+    }
+};

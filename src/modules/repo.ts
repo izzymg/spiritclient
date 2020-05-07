@@ -52,7 +52,7 @@ async function fetchT<T>(path?: string, info?: RequestInit): Promise<T> {
         case 500:
             throw "An unknown error occurred";
         default:
-            throw res.statusText;
+            throw await res.text();
     }
 }
 
@@ -80,8 +80,8 @@ export async function getThread(category: string, thread: number): Promise<Post[
 /**
 Writes a reply to thread, or a new thread if not provided.
 */
-export async function postPost(post: UserPost, category: string, thread?: number): Promise<void> {
-    fetchT<{}>(`${category}/${thread ? thread : 0}`, {
+export async function postPost(post: UserPost, category: string, thread?: number): Promise<{}> {
+    return fetchT<{}>(`${category}/${thread ? thread : 0}`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
