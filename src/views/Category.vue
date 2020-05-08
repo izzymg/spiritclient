@@ -8,7 +8,7 @@
 
     <div v-else-if="state.tag == 'loaded'">
       <h1>{{ catView.name }}</h1>
-      <PostForm :category="catView.name"/>
+      <PostForm :catName="catView.name"/>
       <Toolbar @refresh="loadThreads"/>
 
       <CategoryThreadList

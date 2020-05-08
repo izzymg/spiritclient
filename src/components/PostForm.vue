@@ -26,10 +26,10 @@ import { Notif, State, Loading, Loaded, Errored } from "@/modules/state";
 @Component
 export default class PostForm extends Vue {
   @Prop({ type: String, required: true })
-  private category!: string;
+  private catName!: string;
 
   @Prop({ type: Number, required: false, default: 0 })
-  private thread!: number;
+  private threadNum!: number;
 
   private state: State = { tag: "loaded" };
   private content = "";
@@ -39,14 +39,14 @@ export default class PostForm extends Vue {
       case "loading":
         return "Submitting...";
       default:
-        return this.thread == 0 ? "New thread" : "Reply";
+        return this.threadNum == 0 ? "New thread" : "Reply";
     };
   }
 
   async submit() {
     this.state = { tag: "loading" };
     try {
-      await postPost({ content: this.content }, this.category, this.thread);
+      await postPost({ content: this.content }, this.catName, this.threadNum);
       Notif.notify("Post submitted!");
     } catch(err) {
       Notif.notify(err);

@@ -10,7 +10,7 @@
       </router-link>
       <h2>Thread no.{{ posts[0].num }}</h2>
 
-      <PostForm :category="category" :thread="thread"/>
+      <PostForm :catName="category" :threadNum="thread"/>
 
       <Toolbar @refresh="loadPosts"/>
 
