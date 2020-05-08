@@ -11,6 +11,9 @@
 import { NotifSub, Notif } from "@/modules/state";
 import { Component, Vue } from "vue-property-decorator";
 
+/**
+Global notification component. 
+*/
 @Component
 export default class Notifier extends Vue {
   private text: string = "";

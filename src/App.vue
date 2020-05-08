@@ -2,19 +2,19 @@
 Mounts global notifier and router -->
 <template>
   <div id="app">
-    <Notifier/>
+    <AppNotifier/>
     <LinkHome/>
-    <router-view/>
+    <RouterView/>
   </div>
 </template>
 
 <script>
-import Notifier from "@/components/Notifier.vue"
+import AppNotifier from "@/components/AppNotifier.vue"
 import LinkHome from "@/components/LinkHome.vue"
 
 export default {
   components: {
-    Notifier,
+    AppNotifier,
     LinkHome,
   },
 };
