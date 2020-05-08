@@ -11,11 +11,6 @@ const routes: Array<RouteConfig> = [
     component: Home,
   },
   {
-    path: "/about",
-    name: "About",
-    component: () => import(/* webpackChunkName: "about" */ "../views/About.vue"),
-  },
-  {
     path: "/:category/:thread",
     name: "Thread",
     component: () => import(/* webpackChunkName: "thread" */ "../views/Thread.vue"),
