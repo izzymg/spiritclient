@@ -7,15 +7,15 @@
     </p>
 
     <div v-else-if="state.tag == 'loaded'">
-      <router-link :to="{ name: 'Category', params: { category: catName } }">
-        <h2>{{ catName }}</h2>
+      <router-link :to="{ name: 'Category', params: { category: threadView.category.name } }">
+        <h2>{{ threadView.category.name }}</h2>
       </router-link>
 
       <h2>Thread no.{{ opNumber }}</h2>
 
-      <PostForm :catName="catName" :threadNum="threadNum"/>
-      <Toolbar @refresh="loadPosts"/>
-      <ThreadPostList :posts="posts"/>
+      <PostForm :catName="threadView.category.name" :threadNum="opNumber"/>
+      <Toolbar @refresh="loadThreadView"/>
+      <ThreadPostList :posts="threadView.posts"/>
     </div>
   </div>
 </template>
@@ -26,7 +26,7 @@ import Toolbar from "@/components/Toolbar.vue"
 import ThreadPostList from "@/components/ThreadPostList.vue"
 
 import { Vue, Component } from "vue-property-decorator";
-import { getThread, Post } from "@/modules/repo";
+import { getThreadView, Post, ThreadView } from "@/modules/repo";
 import { Loading, Loaded, Errored, State } from "@/modules/state";
 
 /**
@@ -41,24 +41,22 @@ Thread view, renders a list of all the posts in a thread.
 })
 export default class Thread extends Vue {
   private state: State = { tag: "loading" };
-  private posts: Post[] = [];
-
-  private catName!: string;
-  private threadNum!: number;
+  private threadView!: ThreadView;
 
   created() {
-    this.catName = this.$route.params["category"];
-    this.threadNum = parseInt(this.$route.params["thread"]);
-    this.loadPosts();
+    this.loadThreadView();
   }
 
   get opNumber(): number {
-    return this.posts[0]?.num;
+    return this.threadView.posts[0]?.num;
   }
 
-  async loadPosts() {
+  async loadThreadView() {
     try {
-      this.posts = await getThread(this.catName, this.threadNum);
+      this.threadView = await getThreadView(
+        this.$route.params["category"],
+        parseInt(this.$route.params["thread"]),
+      );
       this.state = { tag: "loaded" };
     } catch(err) {
       this.state = { tag: "error", error: err };

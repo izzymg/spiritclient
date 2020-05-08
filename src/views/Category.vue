@@ -7,9 +7,9 @@
     </p>
 
     <div v-else-if="state.tag == 'loaded'">
-      <h1>{{ catView.name }}</h1>
-      <PostForm :catName="catView.name"/>
-      <Toolbar @refresh="loadThreads"/>
+      <h1>{{ catView.category.name }}</h1>
+      <PostForm :catName="catView.category.name"/>
+      <Toolbar @refresh="loadCatView"/>
 
       <CategoryThreadList
         :threads="catView.threads"
@@ -39,13 +39,13 @@ Category view, renders a list of threads on the category.
 })
 export default class Category extends Vue {
   private state: State = { tag: "loading" };
-  private catView: CatView | null = null;
+  private catView!: CatView;
 
   created() {
-    this.loadThreads();
+    this.loadCatView();
   }
 
-  async loadThreads() {
+  async loadCatView() {
     try {
       this.catView = await getCatView(this.$route.params["category"]);
       this.state = { tag: "loaded" };

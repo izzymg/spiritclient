@@ -26,10 +26,19 @@ export interface UserPost {
 };
 
 /**
+Information about a thread's posts, and its category.
+*/
+export interface ThreadView {
+    category: Category,
+    posts: Post[],
+};
+
+/**
 Information about a category and its active threads.
 */
-export interface CatView extends Category {
-    threads: Post[]
+export interface CatView {
+    category: Category,
+    threads: Post[],
 };
 
 /**
@@ -73,8 +82,8 @@ export async function getCatView(category: string): Promise<CatView> {
 /**
 Fetches a thread and all its replies. 
 */
-export async function getThread(category: string, thread: number): Promise<Post[]> {
-    return fetchT<Post[]>(`${category}/${thread}`);
+export async function getThreadView(category: string, thread: number): Promise<ThreadView> {
+    return fetchT<ThreadView>(`${category}/${thread}`);
 }
 
 /**
