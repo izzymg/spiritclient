@@ -6,17 +6,17 @@
       :class="{ reply: i !== 0, op: i === 0}"
       class="thread-post-wrap"
     >
-      <ThreadPost :post="post" :isOp="i === 0"/>
+      <Post :post="post" :isOp="i === 0"/>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-import { Post } from "@/modules/repo";
+import { Post as PostType } from "@/modules/repo";
 
 import PostForm from "@/components/PostForm.vue";
-import ThreadPost from "@/components/ThreadPost.vue";
+import Post from "@/components/Post.vue";
 import Toolbar from "@/components/Toolbar.vue";
 
 /**
@@ -25,13 +25,13 @@ Lists all posts in a thread.
 @Component({
   components: {
     PostForm,
-    ThreadPost,
+    Post,
     Toolbar,
   },
 })
 export default class ThreadPostList extends Vue {
   @Prop({ required: true })
-  private posts!: Post[];
+  private posts!: PostType[];
 }
 </script>
 

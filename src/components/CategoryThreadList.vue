@@ -2,7 +2,7 @@
   <div class="cat-thread-list">
     <div class="cat-thread-preview" v-for="thread in threads" :key="thread.num">
       <RouterLink :to="{ name: 'Thread', params: { thread: thread.num } }">
-        <ThreadPost isPreview :post="thread"/>
+        <Post isPreview :post="thread"/>
       </RouterLink>
     </div>
   </div>
@@ -10,21 +10,21 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-import { Post } from "@/modules/repo";
+import { Post as PostType } from "@/modules/repo";
 
-import ThreadPost from "@/components/ThreadPost.vue";
+import Post from "@/components/Post.vue";
 
 /**
 Lists a preview of all threads in a category. 
 */
 @Component({
   components: {
-    ThreadPost,
+    Post,
   }
 })
 export default class CategoryThreadList extends Vue {
   @Prop({required: true})
-  private threads!: Post[];
+  private threads!: PostType[];
 }
 </script>
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="thread-post">
+  <div class="post">
     <p class="meta">
       <span v-if="isOp" class="op-tag">Op</span>
       <span class="num">no.{{ post.num }}</span>
@@ -12,16 +12,16 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-import { Post } from "@/modules/repo";
+import { Post as PostType } from "@/modules/repo";
 
 import dayjs from "dayjs";
 
 const previewMaxCharacters = 80;
 
 @Component
-export default class ThreadPost extends Vue {
+export default class Post extends Vue {
   @Prop({ required: true })
-  private post!: Post;
+  private post!: PostType;
 
   @Prop({ required: false, type: Boolean })
   private isOp!: boolean;
@@ -43,7 +43,7 @@ export default class ThreadPost extends Vue {
 </script>
 
 <style>
-.thread-post {
+.post {
   padding: 0.3em;
 
   border: 1px solid hsl(0, 0%, 89%);
@@ -56,39 +56,39 @@ export default class ThreadPost extends Vue {
   transition-timing-function: ease-in;
 }
 
-.thread-post:hover {
+.post:hover {
   border: 1px solid #a7a3a3;
 }
-.thread-post .meta {
+.post .meta {
   margin: 0;
 }
 
-.thread-post .meta .op-tag {
+.post .meta .op-tag {
   float: right;
   color: hsl(0, 0%, 50%);
   font-size: smaller;
 }
 
-.thread-post .meta {
+.post .meta {
   font-size: 0.9em;
 }
 
-.thread-post .meta .num {
+.post .meta .num {
   margin-right: 5px;
   color: #489248;
 }
 
-.thread-post .meta .timestamp {
+.post .meta .timestamp {
   display: block;
   color: #5a4e4e;
 }
 
-.thread-post .content {
+.post .content {
   margin: 0;
   padding: 0.3em 0;
 }
 
-.thread-post .content.small {
+.post .content.small {
   font-size: 0.9em;
 }
 
