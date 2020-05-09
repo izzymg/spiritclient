@@ -51,9 +51,8 @@ export default class Notifier extends Vue {
 
   opacity: 0.8;
 
-  position: sticky;
-  top: 20px;
-
+  position: fixed;
+  top: 30px;
   left: 20px;
   right: 20px;
 
