@@ -1,6 +1,8 @@
 <template>
   <div class="home">
-    <p>Modernized imageboard.</p>
+    <p>
+      Modernish imageboard. (images are todo~)
+    </p>
 
     <h2>Categories</h2>
 
