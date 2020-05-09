@@ -44,9 +44,10 @@ export default class Post extends Vue {
 
 <style>
 .post {
-  padding: 0.3em;
+  padding: 0.8em;
 
-  border: 1px solid hsl(0, 0%, 89%);
+  background: hsl(0, 0%, 100%);
+  border: 1px solid hsl(0, 0%, 85%);
 
   word-break: break-all;
   overflow: hidden;
@@ -75,7 +76,7 @@ export default class Post extends Vue {
 
 .post .meta .num {
   margin-right: 5px;
-  color: #489248;
+  color: var(--link);
 }
 
 .post .meta .timestamp {

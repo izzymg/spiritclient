@@ -20,7 +20,8 @@ export default class Toolbar extends Vue {
   display: flex;
   flex-flow: row-reverse;
 
-  border: 2px solid hsl(0, 0%, 91%);
+  background: hsl(0, 0%, 100%);
+  border: 2px solid hsl(0, 0%, 85%);
   border-left: none;
   border-right: none;
 

@@ -29,6 +29,11 @@ export default class HomeCategoryList extends Vue {
 
 .home-category-list .category {
   margin: 0 0 0.3em 0;
+  background: linear-gradient(
+    to bottom,
+    var(--body-bg),
+    hsl(0, 0%, 100%) 20%
+  );
   border-bottom: 2px solid hsl(0, 0%, 80%);
 
   cursor: pointer;

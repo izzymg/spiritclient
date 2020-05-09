@@ -23,7 +23,14 @@ export default {
 <!-- Global CSS -->
 <style>
 :root {
-  --link: rgb(95, 89, 129);
+  --link: #6ba17c;
+
+  --body-bg: hsl(0, 0%, 98%);
+}
+
+body {
+  margin: 0;
+  background: var(--body-bg);
 }
 
 #app {
