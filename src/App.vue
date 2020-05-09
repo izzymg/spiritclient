@@ -22,6 +22,10 @@ export default {
 
 <!-- Global CSS -->
 <style>
+:root {
+  --link: rgb(95, 89, 129);
+}
+
 #app {
   font-family: "Raleway", Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

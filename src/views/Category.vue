@@ -7,22 +7,26 @@
     </p>
 
     <div v-else-if="state.tag == 'loaded'">
-      <h1>{{ catView.category.name }}</h1>
-      <PostForm :catName="catView.category.name"/>
-      <Toolbar @refresh="loadCatView"/>
-
-      <CategoryThreadList
-        :threads="catView.threads"
-      />
+      <ContentAsideSlot>
+        <template v-slot:content>
+          <Toolbar @refresh="loadCatView"/>
+          <CategoryThreadList :threads="catView.threads"/>
+        </template>
+        <template v-slot:aside>
+          <CategoryAside :catName="catView.category.name"/>
+        </template>
+      </ContentAsideSlot>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator";
-import CategoryThreadList from "@/components/CategoryThreadList.vue"
-import PostForm from "@/components/PostForm.vue";
+
+import ContentAsideSlot from "@/components/ContentAsideSlot.vue"
 import Toolbar from "@/components/Toolbar.vue";
+import CategoryThreadList from "@/components/CategoryThreadList.vue"
+import CategoryAside from "@/components/CategoryAside.vue";
 
 import { getCatView, CatView } from "@/modules/repo";
 import { Loading, Loaded, Errored, State } from "@/modules/state";
@@ -32,9 +36,10 @@ Category view, renders a list of threads on the category.
 */
 @Component({
   components: {
-    PostForm,
+    ContentAsideSlot,
     Toolbar,
     CategoryThreadList,
+    CategoryAside,
   },
 })
 export default class Category extends Vue {
@@ -55,3 +60,4 @@ export default class Category extends Vue {
   }
 }
 </script>
+

@@ -19,7 +19,6 @@ export const Notif = {
     subscribers: new Set<NotifSub>(),
 
     addSubscriber(sub: NotifSub) {
-        console.log("Added sub");
         this.subscribers.add(sub);
     },
 
