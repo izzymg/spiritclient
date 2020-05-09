@@ -9,11 +9,14 @@
     <div v-else-if="state.tag == 'loaded'">
       <ContentAsideSlot>
         <template v-slot:content>
-          <Toolbar @refresh="loadThreadView"/>
           <ThreadPostList :posts="threadView.posts"/>
         </template>
         <template v-slot:aside>
-          <CategoryAside :catName="threadView.category.name" :threadNum="opNumber"/>
+          <CategoryAside
+            @refresh="loadThreadView"
+            :catName="threadView.category.name"
+            :threadNum="opNumber"
+          />
         </template>
       </ContentAsideSlot>
     </div>
@@ -22,7 +25,6 @@
 
 <script lang="ts">
 import ContentAsideSlot from "@/components/ContentAsideSlot.vue"
-import Toolbar from "@/components/Toolbar.vue"
 import ThreadPostList from "@/components/ThreadPostList.vue"
 import CategoryAside from "@/components/CategoryAside.vue"
 
@@ -36,7 +38,6 @@ Thread view, renders a list of all the posts in a thread.
 @Component({
   components: {
     ContentAsideSlot,
-    Toolbar,
     ThreadPostList,
     CategoryAside,
   }

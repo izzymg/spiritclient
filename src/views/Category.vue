@@ -9,11 +9,10 @@
     <div v-else-if="state.tag == 'loaded'">
       <ContentAsideSlot>
         <template v-slot:content>
-          <Toolbar @refresh="loadCatView"/>
           <CategoryThreadList :threads="catView.threads"/>
         </template>
         <template v-slot:aside>
-          <CategoryAside :catName="catView.category.name"/>
+          <CategoryAside @refresh="loadCatView" :catName="catView.category.name"/>
         </template>
       </ContentAsideSlot>
     </div>
@@ -24,7 +23,6 @@
 import { Vue, Component } from "vue-property-decorator";
 
 import ContentAsideSlot from "@/components/ContentAsideSlot.vue"
-import Toolbar from "@/components/Toolbar.vue";
 import CategoryThreadList from "@/components/CategoryThreadList.vue"
 import CategoryAside from "@/components/CategoryAside.vue";
 
@@ -37,7 +35,6 @@ Category view, renders a list of threads on the category.
 @Component({
   components: {
     ContentAsideSlot,
-    Toolbar,
     CategoryThreadList,
     CategoryAside,
   },
