@@ -44,7 +44,11 @@ body {
 a {
   text-decoration: none;
   cursor: pointer;
-  color: inherit;
+  color: var(--link);
+}
+
+a.underlined:hover {
+  text-decoration: underline;
 }
 
 h1, h2, h3, h4 {

@@ -88,6 +88,8 @@ export default class Post extends Vue {
   margin: 0;
   padding: 0.3em 0;
   word-break: break-word;
+
+  color: #000;
 }
 
 .post .content.small {

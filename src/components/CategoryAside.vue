@@ -1,13 +1,10 @@
 <template>
   <aside class="category-aside">
-    <RouterLink :to="{ name: 'Category', params: { category: catName } }">
-      <h1 class="category-name">
-        <span v-if="threadNum" v-html="'&lt;&lt;'"></span>
-        {{ catName }}
-      </h1>
-    </RouterLink>
+    <h1 class="category-name">
+    <RouterLink class="underlined" :to="{ name: 'Category', params: { category: catName } }">{{ catName }}</RouterLink>
+    <span v-if="threadNum" class="thread-num"> / #{{ threadNum }}</span>
+    </h1>
 
-    <h1 v-if="threadNum" class="thread-num">Thread #{{ threadNum }}</h1>
 
     <PostForm @submitted="onSubmitted" :catName="catName" :threadNum="threadNum"/>
     <Toolbar @refresh="emitRefresh"/>
@@ -70,9 +67,5 @@ export default class CategoryAside extends Vue {
   font-size: 2.1em;
   color: hsl(0, 0%, 35%);
   margin: 0;
-}
-
-.category-aside .thread-num {
-  color: var(--link);
 }
 </style>
