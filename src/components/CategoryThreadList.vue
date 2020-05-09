@@ -31,13 +31,13 @@ export default class CategoryThreadList extends Vue {
 <style>
 .cat-thread-list {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-auto-rows: minmax(100px, auto);
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  align-items: center;
   text-align: left;
-}
 
-.cat-thread-list .cat-thread-preview {
-  margin: 0.5em;
+  margin: 0 5px;
+
+  gap: 1.5em;
 }
 
 </style>

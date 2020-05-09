@@ -37,7 +37,7 @@ export default class ThreadPostList extends Vue {
 
 <style>
 .thread-posts .thread-post-wrap {
-  margin: 0.5em 0;
+  margin: 0.5em 5px;
   text-align: left;
 }
 
