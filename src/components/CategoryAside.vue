@@ -1,7 +1,10 @@
 <template>
   <aside class="category-aside">
     <RouterLink :to="{ name: 'Category', params: { category: catName } }">
-      <h1 class="category-name">{{ catName }}</h1>
+      <h1 class="category-name">
+        <span v-if="threadNum" v-html="'&lt;&lt;'"></span>
+        {{ catName }}
+      </h1>
     </RouterLink>
 
     <h1 v-if="threadNum" class="thread-num">Thread #{{ threadNum }}</h1>
@@ -67,5 +70,9 @@ export default class CategoryAside extends Vue {
   font-size: 2.1em;
   color: hsl(0, 0%, 35%);
   margin: 0;
+}
+
+.category-aside .thread-num {
+  color: var(--link);
 }
 </style>
