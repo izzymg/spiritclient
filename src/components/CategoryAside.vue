@@ -43,7 +43,7 @@ export default class CategoryAside extends Vue {
 
 .category-aside .category-name {
   font-size: 2.1em;
-  color: var(--link);
+  color: hsl(0, 0%, 35%);
   margin: 0;
 }
 </style>
