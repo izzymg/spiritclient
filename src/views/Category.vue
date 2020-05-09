@@ -58,6 +58,7 @@ export default class Category extends Vue {
   async loadCatView() {
     try {
       this.catView = await getCatView(this.$route.params["category"]);
+      this.catView.threads = this.catView.threads.reverse();
       this.state = { tag: "loaded" };
       this.meta.categoryThreads = this.catView.threads.length;
     } catch(err) {
