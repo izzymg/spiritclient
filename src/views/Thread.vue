@@ -16,6 +16,7 @@
             @refresh="loadThreadView"
             :catName="threadView.category.name"
             :threadNum="opNumber"
+            :meta="meta"
           />
         </template>
       </ContentAsideSlot>
@@ -30,7 +31,7 @@ import CategoryAside from "@/components/CategoryAside.vue"
 
 import { Vue, Component } from "vue-property-decorator";
 import { getThreadView, Post, ThreadView } from "@/modules/repo";
-import { Loading, Loaded, Errored, State } from "@/modules/state";
+import { Loading, Loaded, Errored, State, Meta } from "@/modules/state";
 
 /**
 Thread view, renders a list of all the posts in a thread. 
@@ -45,6 +46,10 @@ Thread view, renders a list of all the posts in a thread.
 export default class Thread extends Vue {
   private state: State = { tag: "loading" };
   private threadView: ThreadView | null = null;
+
+  private meta: Meta = {
+  };
+
 
   created() {
     this.loadThreadView();
@@ -61,6 +66,9 @@ export default class Thread extends Vue {
         parseInt(this.$route.params["thread"]),
       );
       this.state = { tag: "loaded" };
+      this.meta = {
+        threadReplies: this.threadView.posts.length - 1,
+      };
     } catch(err) {
       this.state = { tag: "error", error: err };
     }

@@ -10,7 +10,12 @@ export interface Loading {
 export interface Loaded {
     tag: "loaded"
 };
-  
+
+export interface Meta {
+    categoryThreads?: number;
+    threadReplies?: number;
+};
+
 export type State = Loading | Errored | Loaded;
 
 export type NotifSub = (text: string) => void;

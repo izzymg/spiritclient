@@ -12,7 +12,11 @@
           <CategoryThreadList :threads="catView.threads"/>
         </template>
         <template v-slot:aside>
-          <CategoryAside @refresh="loadCatView" :catName="catView.category.name"/>
+          <CategoryAside
+            @refresh="loadCatView"
+            :meta="meta"
+            :catName="catView.category.name"
+          />
         </template>
       </ContentAsideSlot>
     </div>
@@ -27,7 +31,7 @@ import CategoryThreadList from "@/components/CategoryThreadList.vue"
 import CategoryAside from "@/components/CategoryAside.vue";
 
 import { getCatView, CatView } from "@/modules/repo";
-import { Loading, Loaded, Errored, State } from "@/modules/state";
+import { Loading, Loaded, Errored, State, Meta } from "@/modules/state";
 
 /**
 Category view, renders a list of threads on the category. 
@@ -43,6 +47,10 @@ export default class Category extends Vue {
   private state: State = { tag: "loading" };
   private catView: CatView | null = null;
 
+  private meta: Meta = {
+    categoryThreads: 0,
+  };
+
   created() {
     this.loadCatView();
   }
@@ -51,6 +59,7 @@ export default class Category extends Vue {
     try {
       this.catView = await getCatView(this.$route.params["category"]);
       this.state = { tag: "loaded" };
+      this.meta.categoryThreads = this.catView.threads.length;
     } catch(err) {
       this.state = { tag: "error", error: err }
     }
