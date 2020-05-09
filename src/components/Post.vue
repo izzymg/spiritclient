@@ -16,7 +16,7 @@ import { Post as PostType } from "@/modules/repo";
 
 import dayjs from "dayjs";
 
-const previewMaxCharacters = 80;
+const previewMaxCharacters = 150;
 
 @Component
 export default class Post extends Vue {
@@ -35,7 +35,7 @@ export default class Post extends Vue {
 
   get previewContent(): string {
     if(this.post.content.length > previewMaxCharacters) {
-      return this.post.content.substr(0, 80) + "...";
+      return this.post.content.substr(0, previewMaxCharacters) + "...";
     }
     return this.post.content;
   }
@@ -87,6 +87,7 @@ export default class Post extends Vue {
 .post .content {
   margin: 0;
   padding: 0.3em 0;
+  word-break: break-word;
 }
 
 .post .content.small {
