@@ -29,11 +29,11 @@ export default class ContentAsideWrap extends Vue {
 }
 
 .content-aside-slot .aside-wrap {
-  flex: 0 1 auto;
+  flex: 1 0;
 }
 
 .content-aside-slot .content-wrap {
-  flex: 1 1 auto;
+  flex: 2 0;
 }
 
 /* Wrap content vertically on small screens */
