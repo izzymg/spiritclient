@@ -44,7 +44,7 @@ Category view, renders a list of threads on the category.
 })
 export default class Category extends Vue {
   private state: State = { tag: "loading" };
-  private catView!: CatView;
+  private catView: CatView | null = null;
 
   created() {
     this.loadCatView();

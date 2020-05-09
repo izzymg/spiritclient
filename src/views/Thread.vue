@@ -43,14 +43,14 @@ Thread view, renders a list of all the posts in a thread.
 })
 export default class Thread extends Vue {
   private state: State = { tag: "loading" };
-  private threadView!: ThreadView;
+  private threadView: ThreadView | null = null;
 
   created() {
     this.loadThreadView();
   }
 
   get opNumber(): number {
-    return this.threadView.posts[0]?.num;
+    return this.threadView?.posts[0]?.num || 0;
   }
 
   async loadThreadView() {
