@@ -3,7 +3,7 @@
     <RouterLink :to="{ name: 'Category', params: { category: catName } }">
       <h1 class="category-name">{{ catName }}</h1>
     </RouterLink>
-    <PostForm :catName="catName" :threadNum="threadNum"/>
+    <PostForm @submitted="onSubmitted" :catName="catName" :threadNum="threadNum"/>
     <Toolbar @refresh="emitRefresh"/>
   </aside>
 </template>
@@ -25,6 +25,13 @@ export default class CategoryAside extends Vue {
   private catName!: string;
   @Prop({ required: false })
   private threadNum!: number | undefined;
+
+  onSubmitted() {
+    setTimeout(() => {
+      this.$emit("refresh");
+      console.log("Refreshed");
+    }, 2000);
+  }
 
   emitRefresh() {
     this.$emit("refresh");
