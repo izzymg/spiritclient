@@ -3,6 +3,9 @@
     <RouterLink :to="{ name: 'Category', params: { category: catName } }">
       <h1 class="category-name">{{ catName }}</h1>
     </RouterLink>
+
+    <h1 v-if="threadNum" class="thread-num">Thread #{{ threadNum }}</h1>
+
     <PostForm @submitted="onSubmitted" :catName="catName" :threadNum="threadNum"/>
     <Toolbar @refresh="emitRefresh"/>
     <div class="meta">
