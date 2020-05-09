@@ -1,10 +1,10 @@
 <template>
   <div class="content-aside-slot">
-    <div class="content-wrap">
-      <slot name="content"/>
-    </div>
     <div class="aside-wrap">
       <slot name="aside"/>
+    </div>
+    <div class="content-wrap">
+      <slot name="content"/>
     </div>
   </div>
 </template>
@@ -33,7 +33,7 @@ export default class ContentAsideWrap extends Vue {
 }
 
 .content-aside-slot .content-wrap {
-  flex: 1 0 auto;
+  flex: 1 1 auto;
 }
 
 /* Wrap content vertically on small screens */

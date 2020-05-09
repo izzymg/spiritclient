@@ -3,7 +3,7 @@
     <p class="meta">
       <span v-if="isOp" class="op-tag">Op</span>
       <span class="num">no.{{ post.num }}</span>
-      <span class="timestamp">{{ timestamp }}</span>
+      <span v-if="!isPreview" class="timestamp">{{ timestamp }}</span>
     </p>
     <p v-if="isPreview" class="content small" v-html="previewContent"/>
     <p v-else v-html="post.content" class="content"/>

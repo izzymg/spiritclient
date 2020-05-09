@@ -36,7 +36,8 @@ export default class CategoryThreadList extends Vue {
 }
 
 .cat-thread-list .cat-thread-preview {
-  flex-basis: 15%;
+  flex: 1 0 15%;
+  max-width: 30%;
   margin: 0.5em;
 }
 
