@@ -44,6 +44,7 @@ export default class PostForm extends Vue {
       await postPost({ content: this.content }, this.catName, this.threadNum);
       Notif.notify("Post submitted!");
       this.$emit("submitted");
+      this.content = "";
     } catch(err) {
       Notif.notify(err);
     }
