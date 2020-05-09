@@ -1,4 +1,4 @@
-const baseURL = "http://localhost:3000/v1";
+const baseURL = `${process.env.VUE_APP_API_URL}/v1`;
 
 /**
 A category of threads.
