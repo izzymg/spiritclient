@@ -18,7 +18,7 @@ Global notification component.
 export default class Notifier extends Vue {
   private text: string = "";
 
-  private clearHandle: number | null;
+  private clearHandle: number | undefined;
 
   created() {
     Notif.addSubscriber(this.onNotif);
