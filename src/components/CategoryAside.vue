@@ -44,7 +44,6 @@ export default class CategoryAside extends Vue {
   onSubmitted() {
     setTimeout(() => {
       this.$emit("refresh");
-      console.log("Refreshed");
     }, 2000);
   }
 
