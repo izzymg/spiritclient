@@ -7,8 +7,15 @@
         @click="submit"
         type="submit"
         :value="submitText"
-        :disabled="state.tag == 'loading'"
+        :disabled="cooldown > 0"
+        :title="submitTooltip"
       >
+      <span 
+        class="length-counter"
+        :class="{ over: contentLength > maxContentLength }"
+      >
+        {{ contentLength }} / {{ maxContentLength }}
+      </span>
     </div>
   </div>
 </template>
@@ -17,6 +24,8 @@
 import { Component, Prop, Vue } from "vue-property-decorator";
 import { postPost, UserPost } from "@/modules/repo";
 import { Notif, State, Loading, Loaded, Errored } from "@/modules/state";
+
+const cooldownSeconds = 30;
 
 @Component
 export default class PostForm extends Vue {
@@ -27,15 +36,28 @@ export default class PostForm extends Vue {
   private threadNum!: number;
 
   private state: State = { tag: "loaded" };
+
   private content = "";
+  private maxContentLength = 300;
+  private cooldown = 0;
+
+  get contentLength(): number {
+    return this.content.length;
+  }
 
   get submitText(): string {
-    switch(this.state.tag) {
-      case "loading":
-        return "Submitting...";
-      default:
-        return this.threadNum == 0 ? "New thread" : "Reply";
-    };
+    if(this.cooldown > 0) {
+      return this.cooldown.toString();
+    }
+    return this.threadNum == 0 ? "New thread" : "Reply";
+  }
+
+  get submitTooltip(): string {
+    if(this.cooldown > 0) {
+      return "Post cooldown";
+    }
+    return this.threadNum == 0 ?
+      "Create a new thread on this category" : "Reply to this thread";
   }
 
   async submit() {
@@ -45,6 +67,16 @@ export default class PostForm extends Vue {
       Notif.notify("Post submitted!");
       this.$emit("submitted");
       this.content = "";
+
+      this.cooldown = cooldownSeconds;
+
+      const counter = setInterval(() => {
+        this.cooldown--;
+        if(this.cooldown <= 0) {
+          clearInterval(counter);
+        }
+      }, 1000);
+
     } catch(err) {
       Notif.notify(err);
     }
@@ -78,6 +110,14 @@ export default class PostForm extends Vue {
 
 .postform .submit-btn {
   margin: 10px 0;
+}
+
+.postform .length-counter {
+  margin: 0 5px;
+}
+
+.postform .length-counter.over {
+  color: lightcoral;
 }
 
 </style>
