@@ -6,7 +6,7 @@
       <span v-if="!isPreview" class="timestamp">{{ timestamp }}</span>
     </p>
     <p v-if="isPreview" class="content small" v-html="previewContent"/>
-    <p v-else v-html="post.content" class="content"/>
+    <pre v-else v-html="post.content" class="content"/>
   </div>
 </template>
 
@@ -88,6 +88,11 @@ export default class Post extends Vue {
   margin: 0;
   padding: 0.3em 0;
   word-break: break-word;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+
+  font-family: inherit;
+
 
   color: #000;
 }
