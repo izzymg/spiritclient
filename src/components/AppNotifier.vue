@@ -18,6 +18,8 @@ Global notification component.
 export default class Notifier extends Vue {
   private text: string = "";
 
+  private clearHandle: number | null;
+
   created() {
     Notif.addSubscriber(this.onNotif);
   }
@@ -36,7 +38,8 @@ export default class Notifier extends Vue {
 
   onNotif(text: string) {
     this.text = text;
-    setTimeout(() => {
+    clearTimeout(this.clearHandle);
+    this.clearHandle = setTimeout(() => {
       this.deactivate();
     }, 3000);
   }
