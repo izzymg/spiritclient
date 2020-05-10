@@ -32,7 +32,8 @@ export default class CategoryThreadList extends Vue {
 .cat-thread-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 500px));
-  align-items: center;
+  align-items: stretch;
+  justify-items: stretch;
   text-align: left;
 
   margin: 0 5px;
