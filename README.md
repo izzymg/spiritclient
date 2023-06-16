@@ -1,5 +1,8 @@
 # spirit-client
 
+Vue.JS frontend for Spirit.
+Backend (Golang + Postgres): https://github.com/izzymg/spiritchat
+
 ## Project setup
 ```
 yarn install
